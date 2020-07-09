@@ -1,0 +1,139 @@
+/*------------------------------------------------------------------------
+------------------------------ Project_Q6 ------------------------------
+--------------------------------------------------------------------------
+-------------------------------- GROUP 11 --------------------------------
+------------------------------------------------------------------------*/
+
+
+//Function 1:  Constructing a 2^n x 2^n Hadamard Matrix using a recursive approach
+
+function Hadamard(n);
+// Managing any possible error with the input 
+
+// Assuming that the input n is a positive Integer Element and the length of the code n is non zero and positive
+    if Category(n) ne RngIntElt and n lt 0 then
+        return "input cannot be negative and must be an integer";
+
+// Assuming that the input n is a positive Integer Element 
+    elif Category(n) ne RngIntElt then
+       return "input is not an integer";
+
+// We then check that the length of the code n is non zero and positive
+   elif n lt 0 then
+       return "input cannot be negative";
+   end if; 
+
+//initialise the recursive Matrix with H1
+G:=Matrix(Integers(),[[1]]);
+
+    if n eq 0 then  
+       return G; 
+    else
+       G:= Hadamard(n-1); 
+
+//we know H is a 2^n x 2^n square matrix
+   H:=ZeroMatrix(Integers(), 2^n,2^n);
+   k:=Nrows(G)+1;
+
+//First block components 
+   InsertBlock(~H,G,1,1);
+
+//Second block components
+   InsertBlock(~H,G,1,k);
+
+//Third block components
+   InsertBlock(~H,G,k,1);
+
+//Fourth block components
+   InsertBlock(~H,-G,k,k);
+   return H;
+
+  end if; 
+
+end function; 
+
+//Checking that our error messages work
+
+//Hadamard(-1);
+//Hadamard(0.5);
+//Hadamard(-5/2); 
+
+//Checking our function works for various valid values of n 
+
+//Hadamard(0);
+//Hadamard(1);
+//Hadamard(2);
+//Hadamard(3);
+//Hadamard(4);
+//Hadamard(5);
+
+//Second Function: Hadamard Code 
+HadCode:=function(n);
+
+//Checking for errors in the input 
+
+// Assuming that the input n is a positive Integer Element and the length of the code n is non zero and positive
+        if Category(n) ne RngIntElt and n lt 0 then
+            return "input cannot be negative and must be an integer";
+
+// Assuming that the input n is a positive Integer Element 
+        elif Category(n) ne RngIntElt then
+	    return "input is not an integer ";
+
+// Also want that n is positive, greater than zero 
+        elif n lt 0 then 
+	    return "input cannot be negative";
+end if; 
+
+
+//Construct the Hadamard Matrix 
+H:= Hadamard(n); 
+
+//Create a set of Integer Vectors given by the rows of H and -H
+R:=RowSequence(H) cat RowSequence(-H);
+
+//transform function 
+//This function maps -1->1 & 1->0
+
+function transform(A, n); 
+   k:=2^(n+1); 
+   w:=2^(n);
+   for i in [1..k] do
+       for j in [1..w] do
+	if A[i,j] eq 1 then 
+           A[i,j]:= 0;
+           else 
+           A[i,j]:=1;
+       end if; 
+       end for;
+   end for; 
+  return A;
+end function; 
+
+//These are our codewords transformed 
+C:=transform(R,n);
+
+//Casting in GF(2)
+
+    K:=GF(2);
+    s:=Ncols(H);
+    vsp:=sub<VectorSpace(K,s)| C>;
+    C:=LinearCode(vsp);
+    return C;
+end function;
+
+//HadCode(2);
+//Category(HadCode(2));
+//IsMDS(HadCode(2));
+//IsCyclic(HadCode(2));
+//IsPerfect(HadCode(2));
+//IsSelfDual(HadCode(2));
+//IsSelfOrthogonal(HadCode(2));
+
+//HadCode(3);
+//Category(HadCode(3));
+//IsMDS(HadCode(3));
+//IsCyclic(HadCode(3));
+//IsPerfect(HadCode(3));
+//IsSelfDual(HadCode(3));
+//IsSelfOrthogonal(HadCode(3));

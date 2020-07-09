@@ -1,0 +1,67 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2511
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww12600\viewh7280\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 seqG := [\
+    [1,0,0,0,0,0,0,1,1,1,1,1],\
+    [0,1,0,0,0,0,1,0,1,2,2,1],\
+    [0,0,1,0,0,0,1,1,0,1,2,2],\
+    [0,0,0,1,0,0,1,2,1,0,1,2],\
+    [0,0,0,0,1,0,1,2,2,1,0,1],\
+    [0,0,0,0,0,1,1,1,2,2,1,0]\
+];\
+\
+G := Matrix(GF(3),seqG);\
+G;\
+C:= LinearCode(G);\
+C;\
+Alphabet(C);\
+Field(C);\
+Length(C);\
+Dimension(C);\
+MinimumDistance(C);\
+StandardForm(C);\
+GeneratorMatrix(C);\
+H := ParityCheckMatrix(C);\
+H;\
+G eq H;\
+IsSelfDual(C);\
+\
+D := Dual(C);\
+C eq D;\
+InformationSpace(C);\
+m := Matrix(GF(3),[[1,2,0,1,2,1]]);\
+m*G;\
+SyndromeSpace(C);\
+AmbientSpace(C);\
+IsMDS(C);\
+IsCyclic(C);\
+IsPerfect(C);\
+G*Transpose(H);\
+c:= Random(C);\
+c*Transpose(H);\
+c[2]:=c[2]+1;\
+c*Transpose(H);\
+\
+/////////////////////\
+\
+HammingCode;\
+HammingCode(GF(2),3);\
+CyclicCode;\
+//CyclicCode();\
+GolayCode;\
+K := GolayCode(GF(2),false);\
+\
+//G := GeneratorMatrix($1);\
+G[1];\
+\
+//col:= \{Transpose(G[i]:i in [1..NumberOfColumns(G)]\}; \
+\
+K;\
+\
+P<x,y> := PolynomialRing(Rationals(),2);\
+WeightDistribution(K);\
+WeightEnumerator(K);}

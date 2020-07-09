@@ -1,0 +1,37 @@
+/*------------------------------------------------------------------------
+------------------------------ ASSIGNMENT 2 ------------------------------
+--------------------------------------------------------------------------
+-------------------------------- GROUP 11 --------------------------------
+------------------------------------------------------------------------*/
+
+/* Exercise 1.14. Write a function IsFermatPseudoPrime(n) that returns true if and only if
+we have a^n−1 ≡ 1 mod n for all 0 < a < n such that GCD(a, n) = 1. */
+
+IsFermatPseudoPrime := function(n)
+    for a in [1..n-1] do
+    m:=Power(a,n-1) mod n;
+// if the GreatestCommonDivisior is 1
+        if GCD(a,n) eq 1 then
+// should return false
+            if m gt 1 then
+            return false;
+// ending if
+            end if;
+// ending if
+        end if;
+//ending for loop
+    end for;
+// should return true
+return true;
+// ending function
+end function;
+
+/*Does the code work?*/
+IsFermatPseudoPrime(1);
+IsFermatPseudoPrime(16);
+IsFermatPseudoPrime(9);
+IsFermatPseudoPrime(186);
+IsFermatPseudoPrime(17);
+IsFermatPseudoPrime(21);
+IsFermatPseudoPrime(20);
+IsFermatPseudoPrime(199);

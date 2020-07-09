@@ -1,0 +1,45 @@
+/*------------------------------------------------------------------------
+-
+----------------------------- ASSIGNMENT 1.2 ------------------------------
+
+--------------------------------------------------------------------------
+-
+------------------------------- GROUP 01 --------------------------------
+--
+----------------------------------------------------------------------*/
+
+
+Insert text here
+
+
+
+function psedopreem(n)
+
+for a in [1..n-1] do
+
+i:=Power(a,n-1) mod n;
+
+if GreatestCommonDivisor(a,n) eq 1 then
+
+if i gt 1 then
+
+return false;
+
+end if;
+
+end if;
+
+end for;
+
+return true;
+
+end function;
+
+
+/*Checking if the code works for prime and non prime numbers*/
+
+psedopreem(5);
+
+psedopreem(4);
+
+psedopreem(561);

@@ -1,0 +1,5 @@
+mctgroup11
+
+ssh mctgroup11@magnet.ucd.ie
+ah8OKgdt
+magma

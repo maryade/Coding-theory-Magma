@@ -1,0 +1,36 @@
+/*------------------------------------------------------------------------
+------------------------------ ASSIGNMENT 1 ------------------------------
+--------------------------------------------------------------------------
+-------------------------------- GROUP 11 --------------------------------
+------------------------------------------------------------------------*/
+
+/* Exercise 1.7. Compute the first twenty lines of Pascal’s triangle. */
+
+//creating an empty array
+//creating the pascal sequence
+p:=[];
+
+//The first two rows are constant
+//first line has 1
+p[1]:=[1];
+
+//second line of has 1
+p[2]:=[1,1];
+
+for j in [3..20] do
+    p[j]:=[];
+        for k in [2..j-1] do
+
+/*Every element is the addition of the two elements
+    on top of it ie, the previous row.*/
+            p[j][k] := p[j-1][k-1]+p[j-1][k];
+
+        end for;
+
+//first input for all lines have 1
+    p[j][1]:=1;
+//the end inputs have 1's
+    p[j][j]:=1;
+
+end for;
+p;

@@ -1,0 +1,77 @@
+/*------------------------------------------------------------------------
+------------------------------ ASSIGNMENT 1 ------------------------------
+--------------------------------------------------------------------------
+-------------------------------- GROUP 11 --------------------------------
+------------------------------------------------------------------------*/
+
+/* Exercise 1.13. Write a function fibonacci(n) that returns the n-th Fibonacci number Fn.
+Remember that F1 = 1, F2 = 1 and Fn = Fn−1 + Fn−2. You can check the correctness by
+comparing the output of you function with that one of the Magma function Fibonacci(n). */
+
+fibonacci := function(n)
+    if n le 2 then
+        return 1;
+    else
+        return $$(n-1) + $$(n-2);
+    end if;
+end function;
+
+fibonacci(55);
+
+/* Exercise 1.14. Write a function IsFermatPseudoPrime(n) that returns true if and only if
+we have a^n−1 ≡ 1 mod n for all 0 < a < n such that GCD(a, n) = 1.*/
+
+function := pascal_triangle(n) 
+
+% The first two rows are constant
+pt(1, 1) = 1;
+pt(2, 1 : 2) = [1 1]; 
+
+% If only two rows are requested, then exit
+if n < 3
+    return
+end 
+
+for r = 3 : n
+    % The first element of every row is always 1
+    pt(r, 1) = 1;   
+
+    % Every element is the addition of the two elements
+    % on top of it. That means the previous row.
+    for c = 2 : r-1
+        pt(r, c) = pt(r-1, c-1) + pt(r-1, c);
+    end   
+
+    % The last element of every row is always 1
+    pt(r, r) = 1;
+end
+fibonacci := function(n)
+    if n le 2 then
+        return 1;
+    else
+        return $$(n-1) + $$(n-2);
+    end if;
+end function;
+
+fibonacci(50);
+
+
+////////assignment 1.1
+
+
+////////assignment 1.2
+IsFermatPseudoPrime := function(n)
+    a:=[1..n-1];
+    v := forall {a:x in Integers(n)|x^n eq x};
+    return v;
+end function;
+IsFermatPseudoPrime(1);
+IsFermatPseudoPrime(16);
+IsFermatPseudoPrime(9);
+IsFermatPseudoPrime(186);
+IsFermatPseudoPrime(17);
+IsFermatPseudoPrime(21);
+IsFermatPseudoPrime(20);
+
+
+

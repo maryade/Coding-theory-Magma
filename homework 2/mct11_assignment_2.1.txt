@@ -1,0 +1,30 @@
+/*------------------------------------------------------------------------
+------------------------------ ASSIGNMENT 2.1 ------------------------------
+--------------------------------------------------------------------------
+-------------------------------- GROUP 11 --------------------------------
+------------------------------------------------------------------------*/
+
+/* Exercise 2.5. Write a function Factorize(p), p prime, that returns the factorization of the polynomial f(x) = x^p − x − 1 ∈ Fp[x] as in Exercise 6.4. */
+
+Factorize := function(p)
+    G := GF(p);
+    P<x> := PolynomialRing(G);
+    f := x^p-x-1;
+
+/* creating the extension */
+    h<a> := ext<G|f>;
+    q<x> := PolynomialRing(h);
+
+/* finding a root    */
+    root := Roots(f,h)[1][1];
+
+/* creating the factors by the method found in Exercise 6.4. */
+    factors := [x-root-i : i in G];
+    return factors;   
+end function;
+
+/*checking it works*/
+&*Factorize(5);
+&*Factorize(3);
+&*Factorize(11);
+&*Factorize(7);

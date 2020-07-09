@@ -1,0 +1,52 @@
+/*------------------------------------------------------------------------
+------------------------------ ASSIGNMENT 4 ------------------------------
+--------------------------------------------------------------------------
+-------------------------------- GROUP 11 --------------------------------
+------------------------------------------------------------------------*/
+
+/* Exercise 3.4. Implement the function VarshamovBound(K,n,d) that returns the Varshamov Bound for a finite field K and integers n, d, such that 0 ≤ d ≤ n. Check Theorem 2.12 of your notes (lower bound for Aq(n, d)). */
+
+GVBound := function(K,n,d)
+
+// We are assuming that K is a Finite Field (FldFin) ie K=GF(p), p prime
+// We start by managing all possible errors in inputs to the function 
+
+/* We check that the minimum distance d is not larger than n the length of the code */
+    if d ge n then 
+        return "d cannot be greater than n";
+    end if;
+
+// We then check that the length of the code n is non zero and positive
+    if n lt 0 then
+        return "n cannot be negative";
+    end if;
+
+/* We then check that the minimum distance d is not less than 2 as we sum from 0 to d-2 */  
+    if d lt 2 then
+        return "d cannot be less than 2";
+    end if;
+
+//We finally check that n and d inputed are integers 
+    if Type(n) ne RngIntElt or Type(d) ne RngIntElt then 
+        return "n and d must be integers";
+    end if; 
+
+/* Once the inputed values satisfy the above conditions we can then perform the Varshamov bound */
+
+// Finding the cardinality of our field 
+    q:= #K;
+
+// Computing the Denominator of our bound 
+    sum:= &+[Binomial(n-1,j)*(q-1)^j : j in [0..d-2]]; 
+
+// Calculating and returning the Varshamov lower bound 
+return "Lower Bound is", q^n/sum;
+     
+end function;
+
+/* Checking the function works for various values and seeing if our error management works  */
+GVBound(GF(3),11,5);
+GVBound(GF(2),-8,-9);
+GVBound(GF(2),0,5);
+GVBound(GF(2),6,1);
+GVBound(GF(2),7/2,5/2);
